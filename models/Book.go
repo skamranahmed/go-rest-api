@@ -6,3 +6,13 @@ type Book struct {
 	Title  string `json:"title"`
 	Author string `json:"author"`
 }
+
+// GetBooks : returns all the entries of the 'book' table
+func (book *Book) GetBooks() (*[]Book, error) {
+	books := []Book{}
+	err := DB.Find(&books).Error
+	if err != nil {
+		return &[]Book{}, err
+	}
+	return &books, nil
+}

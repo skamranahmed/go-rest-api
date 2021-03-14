@@ -22,6 +22,5 @@ func main() {
 
 	// connect db
 	models.ConnectDB()
-
 	r.Run(":8000")
 }
