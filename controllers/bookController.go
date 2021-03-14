@@ -19,3 +19,24 @@ func HandleGetBooks(c *gin.Context) {
 	c.JSON(http.StatusOK, books)
 	return
 }
+
+// HandleCreateBook : Create a book (POST /books)
+func HandleCreateBook(c *gin.Context) {
+	var input models.CreateBookInput
+
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		c.AbortWithStatus(http.StatusInternalServerError)
+		return
+	}
+
+	book := &models.Book{}
+	book, err = book.CreateBook()
+	if err != nil {
+		c.AbortWithStatus(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusOK, book)
+	return
+}
