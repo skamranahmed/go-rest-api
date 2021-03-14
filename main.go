@@ -12,6 +12,7 @@ import (
 
 func main() {
 
+	// load .env file
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println("Error getting env variables: ", err)
@@ -21,8 +22,11 @@ func main() {
 	// initializing default gin router
 	r := gin.Default()
 
-	// connect db
+	// connect to db
 	models.ConnectDB()
+
+	// // seed dummy data in db
+	// seed.PopulateDB()
 
 	// routes
 	r.GET("/books", controllers.HandleGetBooks)

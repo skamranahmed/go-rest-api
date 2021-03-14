@@ -16,7 +16,6 @@ func HandleGetBooks(c *gin.Context) {
 		c.AbortWithStatus(http.StatusInternalServerError)
 		return
 	}
-
 	c.JSON(http.StatusOK, books)
 	return
 }
