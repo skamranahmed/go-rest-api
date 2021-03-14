@@ -1,9 +1,12 @@
 package controllers
 
 import (
+	"errors"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
 	"github.com/skamranahmed/go-rest-api/models"
 )
 
@@ -30,9 +33,32 @@ func HandleCreateBook(c *gin.Context) {
 		return
 	}
 
-	book := &models.Book{}
+	book := &models.Book{Title: input.Title, Author: input.Author}
 	book, err = book.CreateBook()
 	if err != nil {
+		c.AbortWithStatus(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusOK, book)
+	return
+}
+
+// HandleGetBook : Get a book (GET /books/:id)
+func HandleGetBook(c *gin.Context) {
+
+	id, err := strconv.ParseUint(c.Param("id"), 10, 64)
+	if err != nil {
+		c.AbortWithStatus(http.StatusInternalServerError)
+		return
+	}
+
+	book, err := models.GetBook(uint(id))
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.AbortWithStatus(http.StatusNotFound)
+			return
+		}
 		c.AbortWithStatus(http.StatusInternalServerError)
 		return
 	}

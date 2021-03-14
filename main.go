@@ -30,6 +30,8 @@ func main() {
 
 	// routes
 	r.GET("/books", controllers.HandleGetBooks)
+	r.POST("/books", controllers.HandleCreateBook)
+	r.GET("/books/:id", controllers.HandleGetBook)
 
 	r.Run(":8000")
 }

@@ -16,12 +16,10 @@ type CreateBookInput struct {
 // GetBooks : returns all the entries of the 'book' table
 func (book *Book) GetBooks() (*[]Book, error) {
 	books := []Book{}
-
 	err := DB.Find(&books).Error
 	if err != nil {
 		return &[]Book{}, err
 	}
-
 	return &books, nil
 }
 
@@ -32,4 +30,14 @@ func (book *Book) CreateBook() (*Book, error) {
 		return &Book{}, err
 	}
 	return book, nil
+}
+
+// GetBook : finds and returns the book record with the given id
+func GetBook(id uint) (*Book, error) {
+	book := Book{}
+	err := DB.Where("id = ?", id).First(&book).Error
+	if err != nil {
+		return &Book{}, err
+	}
+	return &book, nil
 }
