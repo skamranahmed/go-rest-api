@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/skamranahmed/go-rest-api/controllers"
 	"github.com/skamranahmed/go-rest-api/models"
 )
 
@@ -22,5 +23,9 @@ func main() {
 
 	// connect db
 	models.ConnectDB()
+
+	// routes
+	r.GET("/books", controllers.HandleGetBooks)
+
 	r.Run(":8000")
 }
