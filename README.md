@@ -18,9 +18,9 @@ A boilerplate code for creating a REST API using Go, GIN and GORM.
 
 ## How to work on this project on your local system?
 - Clone the project
-	> #### `git clone `
+	> #### `git clone https://github.com/skamranahmed/go-rest-api`
 - Navigate to the project folder
-    > #### `cd `
+    > #### `cd go-rest-api`
 - Download the project dependcies
     > #### `go mod download`
 - Update the .env file as per your configuration
