@@ -7,10 +7,16 @@ type Book struct {
 	Author string `json:"author"`
 }
 
-// CreateBook -> to validate json input for creating a new book record
+// CreateBookInput -> to validate json input for creating a new book record
 type CreateBookInput struct {
 	Title  string `json:"title" binding:"required"`
 	Author string `json:"author" binding:"required"`
+}
+
+// UpdateBookInput -> to validate json input for updating an existing book record
+type UpdateBookInput struct {
+	Title  string `json:"title"`
+	Author string `json:"author"`
 }
 
 // GetBooks : returns all the entries of the 'book' table
@@ -23,6 +29,16 @@ func (book *Book) GetBooks() (*[]Book, error) {
 	return &books, nil
 }
 
+// GetBook : finds and returns the book record with the given id
+func GetBook(id uint) (*Book, error) {
+	book := Book{}
+	err := DB.Where("id = ?", id).First(&book).Error
+	if err != nil {
+		return &Book{}, err
+	}
+	return &book, nil
+}
+
 // CreateBook : creates a new book record in the 'book' table and returns it
 func (book *Book) CreateBook() (*Book, error) {
 	err := DB.Create(&book).Error
@@ -32,12 +48,11 @@ func (book *Book) CreateBook() (*Book, error) {
 	return book, nil
 }
 
-// GetBook : finds and returns the book record with the given id
-func GetBook(id uint) (*Book, error) {
-	book := Book{}
-	err := DB.Where("id = ?", id).First(&book).Error
+// UpdateBook : updates an existing book record
+func (book *Book) UpdateBook() (*Book, error) {
+	err := DB.Model(&book).Updates(&book).Error
 	if err != nil {
 		return &Book{}, err
 	}
-	return &book, nil
+	return book, nil
 }
