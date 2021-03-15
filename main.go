@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/skamranahmed/go-rest-api/controllers"
+	"github.com/skamranahmed/go-rest-api/handler"
 	"github.com/skamranahmed/go-rest-api/models"
 )
 
@@ -29,11 +29,11 @@ func main() {
 	// seed.PopulateDB()
 
 	// routes
-	r.GET("/books", controllers.HandleGetBooks)
-	r.POST("/books", controllers.HandleCreateBook)
-	r.GET("/books/:id", controllers.HandleGetBook)
-	r.PUT("/books/:id", controllers.HandleUpdateBook)
-	r.DELETE("/books/:id", controllers.HandleDeleteBook)
+	r.GET("/books", handler.HandleGetBooks)
+	r.POST("/books", handler.HandleCreateBook)
+	r.GET("/books/:id", handler.HandleGetBook)
+	r.PUT("/books/:id", handler.HandleUpdateBook)
+	r.DELETE("/books/:id", handler.HandleDeleteBook)
 
 	r.Run(":8000")
 }
