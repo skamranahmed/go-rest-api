@@ -67,7 +67,7 @@ func HandleGetBook(c *gin.Context) {
 	return
 }
 
-// HandleUpdateBook : Update a book (PUT /books/:id)
+// HandleUpdateBook : Update a book record (PUT /books/:id)
 func HandleUpdateBook(c *gin.Context) {
 	id, err := strconv.ParseUint(c.Param("id"), 10, 64)
 	if err != nil {
@@ -100,5 +100,33 @@ func HandleUpdateBook(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, book)
+	return
+}
+
+// HandleDeleteBook : Deletes a book record (DELETE /books/:id)
+func HandleDeleteBook(c *gin.Context) {
+	id, err := strconv.ParseUint(c.Param("id"), 10, 64)
+	if err != nil {
+		c.AbortWithStatus(http.StatusInternalServerError)
+		return
+	}
+
+	book, err := models.GetBook(uint(id))
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.AbortWithStatus(http.StatusNotFound)
+			return
+		}
+		c.AbortWithStatus(http.StatusInternalServerError)
+		return
+	}
+
+	book, err = book.DeleteBook()
+	if err != nil {
+		c.AbortWithStatus(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusNoContent, book)
 	return
 }

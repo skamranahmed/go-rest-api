@@ -33,6 +33,7 @@ func main() {
 	r.POST("/books", controllers.HandleCreateBook)
 	r.GET("/books/:id", controllers.HandleGetBook)
 	r.PUT("/books/:id", controllers.HandleUpdateBook)
+	r.DELETE("/books/:id", controllers.HandleDeleteBook)
 
 	r.Run(":8000")
 }

@@ -56,3 +56,12 @@ func (book *Book) UpdateBook() (*Book, error) {
 	}
 	return book, nil
 }
+
+// DeleteBook : deletes a book record
+func (book *Book) DeleteBook() (*Book, error) {
+	err := DB.Delete(&book).Error
+	if err != nil {
+		return &Book{}, err
+	}
+	return &Book{}, nil
+}
