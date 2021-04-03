@@ -24,3 +24,5 @@ A boilerplate code for creating a REST API using Go, GIN and GORM.
 - Download the project dependcies
     > #### `go mod download`
 - Update the .env file as per your configuration
+- To run the project
+    > #### `go run main.go`
