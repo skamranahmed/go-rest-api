@@ -18,7 +18,7 @@ A boilerplate code for creating a REST API using Go, GIN and GORM.
 
 ## How to work on this project on your local system?
 - Clone the project
-	> #### `git clone https://github.com/skamranahmed/go-rest-api`
+    > #### `git clone https://github.com/skamranahmed/go-rest-api`
 - Navigate to the project folder
     > #### `cd go-rest-api`
 - Download the project dependcies
@@ -26,3 +26,20 @@ A boilerplate code for creating a REST API using Go, GIN and GORM.
 - Update the .env file as per your configuration
 - To run the project
     > #### `go run main.go`
+
+## API Routes
+- Get all books
+    > #### `GET localhost:8000/books`
+
+- Create a new book record
+    > #### `POST localhost:8000/books`
+
+- Get a single book
+    > #### `GET localhost:8000/books/:bookID`
+
+- Update an existing book record
+    > #### `PUT localhost:8000/books/:bookID`
+
+- Delete an existing book record
+    > #### `DELETE localhost:8000/books/:bookID`
+
